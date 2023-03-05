@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='order_action' model='ir.actions.act_window'>
+        <field name="name">Pedidos</field>
+        <field name="res_model">order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Mis Pedidos" id="orders_base_menu" />
+    <menuitem name="Pedidos" id="order_menu" parent="orders_base_menu" action="order_action"/>
+
+    <!-- Formulario -->
+    <record id="order_view_form" model="ir.ui.view">
+
+        <field name="name">Order Form</field>
+        <field name="model">order</field>
+        <field name="arch" type="xml">
+            <form>                
+                <group>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+                <group>
+                    <field name="programmed_date"/>
+                    <field name="frecuency"/>
+                    <field name="frecuency_states"/>
+                </group>
+            </form>
+        </field>
+
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="order_view_tree" model="ir.ui.view">
+
+        <field name="name">Order List</field>
+        <field name="model">order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_ids"/>
+                <field name="programmed_date"/>
+                <field name="frecuency"/>
+                <field name="frecuency_states"/>
+            </tree>
+        </field>
+
+    </record>
+</odoo>
