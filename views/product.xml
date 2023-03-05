@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='product_action' model='ir.actions.act_window'>
+        <field name="name">Products</field>
+        <field name="res_model">product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Mis Productos" id="product_base_menu" />
+    <menuitem name="Productos" id="product_menu" parent="product_base_menu" action="product_action"/>
+
+    <!-- Formulario -->
+    <record id="product_view_form" model="ir.ui.view">
+
+        <field name="name">Product Form</field>
+        <field name="model">product</field>
+        <field name="arch" type="xml">
+            <form>                
+                <group>
+                    <field name="name"/>
+                </group>
+                <group>
+                    <field name="manufacturer"/>
+                    <field name="stock"/>
+                    <field name="price"/>
+                </group>
+            </form>
+        </field>
+
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="product_view_tree" model="ir.ui.view">
+
+        <field name="name">Product List</field>
+        <field name="model">product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="manufacturer"/>
+                <field name="stock"/>
+                <field name="price"/>
+            </tree>
+        </field>
+
+    </record>
+</odoo>

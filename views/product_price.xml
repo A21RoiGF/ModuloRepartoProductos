@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Formulario -->
+    <record id="product_price_view_form" model="ir.ui.view">
+
+        <field name="name">Product Price Form</field>
+        <field name="model">product.price</field>
+        <field name="arch" type="xml">
+            <form>                
+                <group>
+                    <field name="value"/>
+                    <field name="date"/>
+                    <field name="active"/>
+                </group>
+            </form>
+        </field>
+
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="product_price_view_tree" model="ir.ui.view">
+        <field name="name">Product Price List</field>
+        <field name="model">product.price</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="value"/>
+                <field name="date"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
