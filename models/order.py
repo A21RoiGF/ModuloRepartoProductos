@@ -9,7 +9,7 @@ class Order(models.Model):
     _description = 'Pedido'
 
     programmed_date = fields.Date('Fecha programada')
-    product_ids=fields.One2many('product',string='Producto',inverse_name='product_id')
+    product_ids=fields.Many2many('product',string='Producto')
     frecuency = fields.Integer('Repartir cada')
     frecuency_states = fields.Selection([
         ('daily', 'Dias'),

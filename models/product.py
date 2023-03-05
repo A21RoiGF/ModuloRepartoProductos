@@ -15,8 +15,6 @@ class Product(models.Model):
 
     old_prices = fields.One2many(
         'product.price', inverse_name='price_id', string='Precios anteriores €')
-    
-    product_id=fields.Many2one('order')
 
 
 class ProductPrice(models.Model):
