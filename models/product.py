@@ -13,13 +13,12 @@ class Product(models.Model):
     stock = fields.Integer('Stock')
     current_price = fields.Float('Precio actual €', required=True)
 
-    old_prices = fields.One2many(
-        'product.price', inverse_name='price_id', string='Precios anteriores €')
+    old_prices = fields.Many2many(
+        'product.price', string='Precios anteriores €')
 
 
 class ProductPrice(models.Model):
     _name = 'product.price'
 
-    price_id = fields.Many2one('product', required=True)
     value = fields.Float('Precio')
     date = fields.Date('Fecha')
