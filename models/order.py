@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 from odoo.tools.translate import _
+from odoo.exceptions import UserError
 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
@@ -25,6 +26,14 @@ class Order(models.Model):
     order_lines=fields.Many2many('order.line',string='Lineas del pedido',required=True)
 
     frecuency = fields.Integer('Repartir cada',required=True)
+
+    @api.constrains('frecuency')
+    def _check_frecuency(self):
+        for order in self:
+            if order.frecuency==0:
+                raise UserError('La frecuencia de un pedido no puede ser 0')
+
+
     frecuency_states = fields.Selection([
         ('daily', 'Dias'),
         ('monthly', 'Meses'),
