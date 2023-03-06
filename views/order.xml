@@ -17,9 +17,7 @@
         <field name="arch" type="xml">
             <form>                
                 <group>
-                    <field name="product_ids" widget="many2many_tags"/>
-                </group>
-                <group>
+                    <field name="order_lines"/>
                     <field name="programmed_date"/>
                     <field name="frecuency"/>
                     <field name="frecuency_states"/>
@@ -36,7 +34,7 @@
         <field name="model">order</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="product_ids"/>
+                <field name="order_lines"/>
                 <field name="programmed_date"/>
                 <field name="frecuency"/>
                 <field name="frecuency_states"/>

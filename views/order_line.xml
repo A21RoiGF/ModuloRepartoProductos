@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <!-- Formulario -->
+    <record id="order_line_view_form" model="ir.ui.view">
+
+        <field name="name">Order Line Form</field>
+        <field name="model">order.line</field>
+        <field name="arch" type="xml">
+            <form>                
+                <group>
+                    <field name="product_id"/>
+                    <field name="amount"/>
+                </group>
+            </form>
+        </field>
+
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="order_line_view_tree" model="ir.ui.view">
+
+        <field name="name">Order Line List</field>
+        <field name="model">order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+
+    </record>
+</odoo>
