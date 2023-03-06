@@ -12,7 +12,7 @@ class Order(models.Model):
 
     programmed_date = fields.Date('Fecha comienzo')
     # many2many pq un pedido puede tener varios productos y un producto estar en varios pedidos
-    product_ids=fields.Many2many('product',string='Producto')
+    product_ids=fields.Many2many('product',string='Productos')
     frecuency = fields.Integer('Repartir cada')
     frecuency_states = fields.Selection([
         ('daily', 'Dias'),
