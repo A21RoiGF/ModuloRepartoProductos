@@ -30,5 +30,14 @@ class Order(models.Model):
                 order.next_delivery_date=order.programmed_date+relativedelta(months=order.frecuency)
             elif(order.frecuency_states=='weekly'):
                 order.next_delivery_date=order.programmed_date+timedelta(weeks=order.frecuency)
+
+    total_price=fields.Float('Precio total',compute='calculate_total_price',readonly=True)
+
+    def calculate_total_price(self):
+        for order in self:
+            totalPrice=0
+            for product in order.product_ids:
+                totalPrice+=product.current_price
+            order.total_price=totalPrice
             
     

@@ -41,6 +41,7 @@
                 <field name="frecuency"/>
                 <field name="frecuency_states"/>
                 <field name="next_delivery_date"/>
+                <field name="total_price"/>
             </tree>
         </field>
 
