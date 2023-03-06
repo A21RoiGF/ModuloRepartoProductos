@@ -19,7 +19,6 @@
                 <group>
                     <field name="name"/>
                     <field name="manufacturer"/>
-                    <field name="amount"/>
                     <field name="current_price"/>
                 </group>
                 <group>
