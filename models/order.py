@@ -3,7 +3,7 @@ from odoo import models, fields, api
 from odoo.tools.translate import _
 
 from datetime import datetime, timedelta
-
+from dateutil.relativedelta import relativedelta
 
 class Order(models.Model):
 
@@ -24,5 +24,11 @@ class Order(models.Model):
 
     def calculate_delivery_date(self):
         for order in self:
-            order.next_delivery_date=order.programmed_date+timedelta(days=10)
+            if(order.frecuency_states=='daily'):
+                order.next_delivery_date=order.programmed_date+timedelta(days=order.frecuency)
+            elif(order.frecuency_states=='monthly'):
+                order.next_delivery_date=order.programmed_date+relativedelta(months=order.frecuency)
+            elif(order.frecuency_states=='weekly'):
+                order.next_delivery_date=order.programmed_date+timedelta(weeks=order.frecuency)
+            
     

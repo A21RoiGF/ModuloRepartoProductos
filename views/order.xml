@@ -23,7 +23,6 @@
                     <field name="programmed_date"/>
                     <field name="frecuency"/>
                     <field name="frecuency_states"/>
-                    <field name="next_delivery_date"/>
                 </group>
             </form>
         </field>
