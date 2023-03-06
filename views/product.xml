@@ -19,7 +19,7 @@
                 <group>
                     <field name="name"/>
                     <field name="manufacturer"/>
-                    <field name="stock"/>
+                    <field name="amount"/>
                     <field name="current_price"/>
                 </group>
                 <group>
@@ -39,7 +39,6 @@
             <tree>
                 <field name="name"/>
                 <field name="manufacturer"/>
-                <field name="stock"/>
                 <field name="current_price"/>
             </tree>
         </field>

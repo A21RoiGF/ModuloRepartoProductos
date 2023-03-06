@@ -37,7 +37,7 @@ class Order(models.Model):
         for order in self:
             totalPrice=0
             for product in order.product_ids:
-                totalPrice+=product.current_price
+                totalPrice+=product.current_price*product.amount
             order.total_price=totalPrice
             
     

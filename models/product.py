@@ -10,8 +10,8 @@ class Product(models.Model):
 
     name = fields.Char('Nombre', required=True)
     manufacturer = fields.Char('Fabricante', required=True)
-    stock = fields.Integer('Stock')
-    current_price = fields.Float('Precio actual €', required=True)
+    amount = fields.Integer('Cantidad')
+    current_price = fields.Float('Precio actual por unidad €', required=True)
 
     old_prices = fields.Many2many(
         'product.price', string='Precios anteriores €')
