@@ -21,10 +21,10 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/order.xml',
-        'views/order_line.xml',
-        'views/product.xml',
-        'views/product_price.xml',
+        'views/delivery_order.xml',
+        'views/delivery_order_line.xml',
+        'views/delivery_product.xml',
+        'views/delivery_product_price.xml',
         
     ],
     # only loaded in demonstration mode

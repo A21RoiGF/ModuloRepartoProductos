@@ -8,22 +8,22 @@ from dateutil.relativedelta import relativedelta
 
 class OrderLine(models.Model):
 
-    _name = 'order.line'
+    _name = 'delivery.order.line'
     _description = 'Linea de pedido'
 
-    # many2one pq un producto puede estar en varias lineas y ???
-    product_id=fields.Many2one('product',string='Productos')
+    # many2one pq un producto puede estar en varias lineas pero cada linea solo un producto
+    product_id=fields.Many2one('delivery.product',string='Productos')
     amount=fields.Integer('Cantidad') 
 
 class Order(models.Model):
 
-    _name = 'order'
+    _name = 'delivery.order'
     _description = 'Pedido'
 
     programmed_date = fields.Date('Fecha comienzo',required=True)
     
     # many2many pq un pedido puede tener varias lineas y estar en otros pedidos
-    order_lines=fields.Many2many('order.line',string='Lineas del pedido',required=True)
+    order_lines=fields.Many2many('delivery.order.line',string='Lineas del pedido',required=True)
 
     frecuency = fields.Integer('Repartir cada',required=True)
 
@@ -44,6 +44,10 @@ class Order(models.Model):
 
     def calculate_delivery_date(self):
         for order in self:
+            if(order.active_order==False):
+                order.next_delivery_date=False
+                return
+            
             if(order.frecuency_states=='daily'):
                 order.next_delivery_date=order.programmed_date+timedelta(days=order.frecuency)
             elif(order.frecuency_states=='monthly'):
@@ -59,3 +63,16 @@ class Order(models.Model):
             for order_line in order.order_lines:
                 totalPrice+=order_line.product_id.current_price*order_line.amount
             order.total_price+=totalPrice
+
+    active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
+
+    # Borrar un registro
+    def delete_order(self):
+        for order in self:
+            order.unlink()
+            
+    
+    def deactivate_order(self):
+        for order in self:
+            order.active_order=not(order.active_order)
+            order.next_delivery_date=False

@@ -2,7 +2,7 @@
 <odoo>
     <record id='order_action' model='ir.actions.act_window'>
         <field name="name">Pedidos</field>
-        <field name="res_model">order</field>
+        <field name="res_model">delivery.order</field>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -13,11 +13,12 @@
     <record id="order_view_form" model="ir.ui.view">
 
         <field name="name">Order Form</field>
-        <field name="model">order</field>
+        <field name="model">delivery.order</field>
         <field name="arch" type="xml">
             <form>                
                 <group>
                     <field name="order_lines"/>
+                    <field name="active_order"/>
                     <field name="programmed_date"/>
                     <field name="frecuency"/>
                     <field name="frecuency_states"/>
@@ -31,15 +32,20 @@
     <record id="order_view_tree" model="ir.ui.view">
 
         <field name="name">Order List</field>
-        <field name="model">order</field>
+        <field name="model">delivery.order</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="order_lines"/>
+                <field name="active_order"/>
                 <field name="programmed_date"/>
                 <field name="frecuency"/>
                 <field name="frecuency_states"/>
                 <field name="next_delivery_date"/>
                 <field name="total_price"/>
+                <header>
+                    <button name="deactivate_order" string="Cancelar/Activar envio del pedido" type="object"/>
+                    <button name="delete_order" string="Borrar pedido" type="object"/>
+                </header>
             </tree>
         </field>
 
