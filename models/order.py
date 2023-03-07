@@ -76,3 +76,15 @@ class Order(models.Model):
         for order in self:
             order.active_order=not(order.active_order)
             order.next_delivery_date=False
+
+    def make_copy(self):
+        for order in self:
+            new_order=order.copy()
+
+        return {'message': 'Se ha creado una copia del/os registro/s seleccionado/s.'}
+
+    def delete_all_orders(self):
+
+        all_records = self.search([])
+        all_records.unlink()
+    
