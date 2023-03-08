@@ -73,7 +73,7 @@ class Order(models.Model):
     @api.depends('delivery_adress_id')
     def _compute_adress_name(self):
         for order in self:
-            order.delivery_adress_name = str(order.delivery_adress_id.adress)+' - '+order.delivery_adress_id.country_id.name
+            order.delivery_adress_name = str(order.delivery_adress_id.adress)+' - '+order.delivery_adress_id.country_id.name + ' (delivery.adress,' + str(order.delivery_adress_id.id) + ')'
 
 
     # Borrar un registro
