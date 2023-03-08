@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="delivery_adress"/>
+                    <field name="adress"/>
                     <field name="country_id" widget="selection"/>
                 </group>
             </form>
@@ -21,7 +21,7 @@
         <field name="model">delivery.adress</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="delivery_adress"/>
+                <field name="adress"/>
                 <field name="country_id" widget="selection"/>
             </tree>
         </field>

@@ -2,6 +2,7 @@
 from odoo import models, fields, api
 from odoo.tools.translate import _
 from odoo.exceptions import UserError
+from odoo.addons.base.models.res_country import Country
 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
@@ -67,7 +68,13 @@ class Order(models.Model):
     active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
 
     delivery_adress_id=fields.Many2one('delivery.adress',string='Dirección de entrega')
-    #añadir prohibicion o required
+    delivery_adress_name=fields.Char(string='DIrección de entrega',compute='_compute_adress_name')
+
+    @api.depends('delivery_adress_id')
+    def _compute_adress_name(self):
+        for order in self:
+            order.delivery_adress_name = str(order.delivery_adress_id.adress)+' - '+order.delivery_adress_id.country_id.name
+
 
     # Borrar un registro
     def delete_order(self):
@@ -89,4 +96,11 @@ class Order(models.Model):
 
         all_records = self.search([])
         all_records.unlink()
+
+class Adress(models.Model):
+
+    _name = 'delivery.adress'
+
+    adress=fields.Char('Dirección de entrega',required=True)
+    country_id = fields.Many2one('res.country', string='Country')
     
