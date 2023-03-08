@@ -75,7 +75,6 @@ class Order(models.Model):
     def deactivate_order(self):
         for order in self:
             order.active_order=not(order.active_order)
-            order.next_delivery_date=False
 
     def make_copy(self):
         for order in self:
