@@ -18,6 +18,8 @@ class Product(models.Model):
 
     old_prices = fields.Many2many('delivery.product.price', string='Precios anteriores €')
 
+    image=fields.Binary('Imagen del producto')
+
 
 class ProductPrice(models.Model):
     _name = 'delivery.product.price'
