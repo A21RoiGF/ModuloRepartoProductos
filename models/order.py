@@ -66,6 +66,9 @@ class Order(models.Model):
 
     active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
 
+    delivery_adress_id=fields.Many2one('delivery.adress',string='Dirección de entrega')
+    #añadir prohibicion o required
+
     # Borrar un registro
     def delete_order(self):
         for order in self:
