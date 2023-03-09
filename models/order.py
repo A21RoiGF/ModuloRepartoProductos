@@ -20,6 +20,7 @@ class Order(models.Model):
 
     _name = 'delivery.order'
     _description = 'Pedido'
+    _order = 'next_delivery_date asc'
 
     programmed_date = fields.Date('Fecha comienzo',required=True)
     
@@ -41,22 +42,10 @@ class Order(models.Model):
         ('weekly', 'Semanas')],
         'Espacio de tiempo', default="weekly",required=True)
     
-    next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True)
+    next_delivery_date=fields.Date('Fecha entrega',compute='_calculate_delivery_date',store=True,readonly=True)
 
-    remaining_days = fields.Integer(string='Días restantes',compute='_compute_remaining_days',readonly=True)
-
-    @api.depends('next_delivery_date')
-    def _compute_remaining_days(self):
-        actual_date=datetime.now().date()
-        for order in self:
-            if order.next_delivery_date:
-                delivery_date=datetime.strptime(order.next_delivery_date.strftime('%Y-%m-%d'), '%Y-%m-%d').date()
-                remaining_days = (delivery_date - actual_date).days
-                order.remaining_days = remaining_days if remaining_days >= 0 else 0
-            else:
-                order.remaining_days = 0
-
-    def calculate_delivery_date(self):
+    @api.depends('active_order','frecuency_states','programmed_date','frecuency')
+    def _calculate_delivery_date(self):
         for order in self:
             if(order.active_order==False):
                 order.next_delivery_date=False
@@ -68,6 +57,18 @@ class Order(models.Model):
                 order.next_delivery_date=order.programmed_date+relativedelta(months=order.frecuency)
             elif(order.frecuency_states=='weekly'):
                 order.next_delivery_date=order.programmed_date+timedelta(weeks=order.frecuency)
+
+    remaining_days = fields.Integer(string='Días restantes',compute='compute_remaining_days',readonly=True)
+
+    def compute_remaining_days(self):
+        actual_date=datetime.now().date()
+        for order in self:
+            if order.next_delivery_date:
+                delivery_date=datetime.strptime(order.next_delivery_date.strftime('%Y-%m-%d'), '%Y-%m-%d').date()
+                remaining_days = (delivery_date - actual_date).days
+                order.remaining_days = remaining_days if remaining_days >= 0 else 0
+            else:
+                order.remaining_days = 0
 
     total_price=fields.Float('Precio total',compute='calculate_total_price',readonly=True)
 
