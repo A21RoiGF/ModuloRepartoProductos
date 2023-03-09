@@ -20,7 +20,6 @@ class Order(models.Model):
 
     _name = 'delivery.order'
     _description = 'Pedido'
-    _order = 'next_delivery_date asc'
 
     programmed_date = fields.Date('Fecha comienzo',required=True)
     
@@ -42,7 +41,7 @@ class Order(models.Model):
         ('weekly', 'Semanas')],
         'Espacio de tiempo', default="weekly",required=True)
     
-    next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True,store=True)
+    next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True)
 
     def calculate_delivery_date(self):
         for order in self:
@@ -69,7 +68,7 @@ class Order(models.Model):
     active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
 
     delivery_adress_id=fields.Many2one('delivery.adress',string='Dirección de entrega')
-    delivery_adress_name=fields.Char(string='DIrección de entrega',compute='_compute_adress_name')
+    delivery_adress_name=fields.Char(string='Dirección de entrega',compute='_compute_adress_name')
 
     @api.depends('delivery_adress_id')
     def _compute_adress_name(self):
