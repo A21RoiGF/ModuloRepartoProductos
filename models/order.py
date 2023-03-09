@@ -20,6 +20,7 @@ class Order(models.Model):
 
     _name = 'delivery.order'
     _description = 'Pedido'
+    _order = 'next_delivery_date asc'
 
     programmed_date = fields.Date('Fecha comienzo',required=True)
     
@@ -41,7 +42,7 @@ class Order(models.Model):
         ('weekly', 'Semanas')],
         'Espacio de tiempo', default="weekly",required=True)
     
-    next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True)
+    next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True,store=True)
 
     def calculate_delivery_date(self):
         for order in self:

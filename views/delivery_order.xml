@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id='order_action' model='ir.actions.act_window'>
-        <field name="name">Pedidos</field>
+        <field name="name">Pedidos (Ordenados por fecha de entrega)</field>
         <field name="res_model">delivery.order</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -45,10 +45,10 @@
                 <field name="delivery_adress_name"/>
                 <field name="total_price"/>
                 <header>
-                    <button name="delete_all_orders" string="Borrar todos los pedidos" type="object"/>
                     <button name="deactivate_order" string="Cancelar/Activar envio del pedido" type="object"/>
                     <button name="make_copy" string="Hacer una copia del pedido" type="object"/>
                     <button name="delete_order" string="Borrar pedido" type="object"/>
+                    <button name="delete_all_orders" string="Borrar todos los pedidos" type="object"/>
                 </header>
             </tree>
         </field>
