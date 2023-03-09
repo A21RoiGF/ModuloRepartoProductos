@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id='order_action' model='ir.actions.act_window'>
-        <field name="name">Pedidos (Ordenados por fecha de entrega)</field>
+        <field name="name">Pedidos</field>
         <field name="res_model">delivery.order</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -38,10 +38,11 @@
             <tree>
                 <field name="order_lines"/>
                 <field name="active_order"/>
-                <field name="programmed_date"/>
                 <field name="frecuency"/>
                 <field name="frecuency_states"/>
+                <field name="programmed_date"/>
                 <field name="next_delivery_date"/>
+                <field name="remaining_days" attrs="{'invisible': [('remaining_days', '=', 0)]}"/>
                 <field name="delivery_adress_name"/>
                 <field name="total_price"/>
                 <header>

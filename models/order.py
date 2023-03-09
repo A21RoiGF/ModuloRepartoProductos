@@ -43,6 +43,19 @@ class Order(models.Model):
     
     next_delivery_date=fields.Date('Fecha entrega',compute='calculate_delivery_date',readonly=True)
 
+    remaining_days = fields.Integer(string='Días restantes',compute='_compute_remaining_days',readonly=True)
+
+    @api.depends('next_delivery_date')
+    def _compute_remaining_days(self):
+        actual_date=datetime.now().date()
+        for order in self:
+            if order.next_delivery_date:
+                delivery_date=datetime.strptime(order.next_delivery_date.strftime('%Y-%m-%d'), '%Y-%m-%d').date()
+                remaining_days = (delivery_date - actual_date).days
+                order.remaining_days = remaining_days if remaining_days >= 0 else 0
+            else:
+                order.remaining_days = 0
+
     def calculate_delivery_date(self):
         for order in self:
             if(order.active_order==False):
@@ -67,7 +80,7 @@ class Order(models.Model):
 
     active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
 
-    delivery_adress_id=fields.Many2one('delivery.adress',string='Dirección de entrega')
+    delivery_adress_id=fields.Many2one('delivery.adress',string='Dirección de entrega',required=True)
     delivery_adress_name=fields.Char(string='Dirección de entrega',compute='_compute_adress_name')
 
     @api.depends('delivery_adress_id')
@@ -102,5 +115,5 @@ class Adress(models.Model):
     _name = 'delivery.adress'
 
     adress=fields.Char('Dirección de entrega',required=True)
-    country_id = fields.Many2one('res.country', string='Country')
+    country_id = fields.Many2one('res.country', string='Country', required=True)
     
