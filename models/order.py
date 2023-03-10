@@ -16,7 +16,7 @@ class OrderLine(models.Model):
     product_id=fields.Many2one('delivery.product',string='Productos')
     amount=fields.Integer('Cantidad')
 
-    order_id=fields.Many2one('delivery.order',required=True)
+    order_id=fields.Many2one('delivery.order',required=True,ondelete='cascade')
 
 class Order(models.Model):
 
@@ -33,7 +33,7 @@ class Order(models.Model):
                 raise UserError('La fecha de comienzo del pedido no puede ser anterior a la fecha actual')
     
     # many2many pq un pedido puede tener varias lineas y estar en otros pedidos
-    order_lines=fields.One2many('delivery.order.line',string='Lineas del pedido',inverse_name='order_id',required=True)
+    order_lines=fields.One2many('delivery.order.line',string='Lineas del pedido',inverse_name='order_id',required=True,ondelete='cascade')
 
     frecuency = fields.Integer('Repartir cada',required=True)
 
@@ -78,7 +78,7 @@ class Order(models.Model):
             else:
                 order.remaining_days = 0
 
-    total_price=fields.Float('Precio total',compute='calculate_total_price',readonly=True)
+    total_price=fields.Float('Precio por entrega',compute='calculate_total_price',readonly=True)
 
     def calculate_total_price(self):
         for order in self:
@@ -86,6 +86,18 @@ class Order(models.Model):
             for order_line in order.order_lines:
                 totalPrice+=order_line.product_id.current_price*order_line.amount
             order.total_price+=totalPrice
+
+    weekly_price=fields.Float('Precio semanal',compute='calculate_weekly_price',readonly=True)
+
+    def calculate_weekly_price(self):
+        for order in self:
+            if(order.frecuency_states=='daily'):
+                daily_price=order.total_price/order.frecuency
+                order.weekly_price=daily_price*7
+            elif(order.frecuency_states=='weekly'):
+                order.weekly_price=order.total_price/order.frecuency
+            elif(order.frecuency_states=='monthly'):
+                order.weekly_price=(order.total_price/order.frecuency)*4 
 
     active_order=fields.Boolean('Pedido Activo',default=True,readonly=True)
 

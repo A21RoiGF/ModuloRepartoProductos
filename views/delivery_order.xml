@@ -44,6 +44,7 @@
                 <field name="next_delivery_date"/>
                 <field name="remaining_days" attrs="{'invisible': [('remaining_days', '=', 0)]}"/>
                 <field name="delivery_adress_name"/>
+                <field name="weekly_price"/>
                 <field name="total_price"/>
                 <header>
                     <button name="deactivate_order" string="Cancelar/Activar envio del pedido" type="object"/>
