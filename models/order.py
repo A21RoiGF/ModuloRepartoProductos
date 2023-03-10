@@ -14,7 +14,9 @@ class OrderLine(models.Model):
 
     # many2one pq un producto puede estar en varias lineas pero cada linea solo un producto
     product_id=fields.Many2one('delivery.product',string='Productos')
-    amount=fields.Integer('Cantidad') 
+    amount=fields.Integer('Cantidad')
+
+    order_id=fields.Many2one('delivery.order',required=True)
 
 class Order(models.Model):
 
@@ -25,7 +27,7 @@ class Order(models.Model):
     programmed_date = fields.Date('Fecha comienzo',required=True)
     
     # many2many pq un pedido puede tener varias lineas y estar en otros pedidos
-    order_lines=fields.Many2many('delivery.order.line',string='Lineas del pedido',required=True)
+    order_lines=fields.One2many('delivery.order.line',string='Lineas del pedido',inverse_name='order_id',required=True)
 
     frecuency = fields.Integer('Repartir cada',required=True)
 
