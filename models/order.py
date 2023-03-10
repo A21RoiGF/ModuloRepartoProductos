@@ -32,7 +32,7 @@ class Order(models.Model):
             if(order.programmed_date < fields.Date.today()):
                 raise UserError('La fecha de comienzo del pedido no puede ser anterior a la fecha actual')
     
-    # many2many pq un pedido puede tener varias lineas y estar en otros pedidos
+    # one2many pq un pedido puede tener varias lineas y las lineas no pueden estar en otros pedidos
     order_lines=fields.One2many('delivery.order.line',string='Lineas del pedido',inverse_name='order_id',required=True,ondelete='cascade')
 
     frecuency = fields.Integer('Repartir cada',required=True)
