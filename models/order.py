@@ -25,6 +25,12 @@ class Order(models.Model):
     _order = 'next_delivery_date asc'
 
     programmed_date = fields.Date('Fecha comienzo',required=True)
+
+    @api.constrains('programmed_date')
+    def check_programmed_date(self):
+        for order in self:
+            if(order.programmed_date < fields.Date.today()):
+                raise UserError('La fecha de comienzo del pedido no puede ser anterior a la fecha actual')
     
     # many2many pq un pedido puede tener varias lineas y estar en otros pedidos
     order_lines=fields.One2many('delivery.order.line',string='Lineas del pedido',inverse_name='order_id',required=True)
@@ -111,12 +117,4 @@ class Order(models.Model):
     def delete_all_orders(self):
 
         all_records = self.search([])
-        all_records.unlink()
-
-class Adress(models.Model):
-
-    _name = 'delivery.adress'
-
-    adress=fields.Char('Dirección de entrega',required=True)
-    country_id = fields.Many2one('res.country', string='Country', required=True)
-    
+        all_records.unlink()    
