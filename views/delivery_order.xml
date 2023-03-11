@@ -46,6 +46,7 @@
                 <field name="delivery_adress_name"/>
                 <field name="weekly_price"/>
                 <field name="total_price"/>
+                <field name="total_cost"/>
                 <header>
                     <button name="deactivate_order" string="Cancelar/Activar envio del pedido" type="object"/>
                     <button name="make_copy" string="Hacer una copia del pedido" type="object"/>

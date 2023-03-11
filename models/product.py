@@ -16,6 +16,8 @@ class Product(models.Model):
     manufacturer = fields.Many2many('res.partner', string='Fabricantes')
     current_price = fields.Float('Precio actual por unidad €', required=True)
 
+    current_cost=fields.Float('Coste actual por unidad €')
+
     old_prices = fields.Many2many('delivery.product.price', string='Precios anteriores €')
 
     image=fields.Binary('Imagen del producto')

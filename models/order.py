@@ -87,6 +87,15 @@ class Order(models.Model):
                 totalPrice+=order_line.product_id.current_price*order_line.amount
             order.total_price+=totalPrice
 
+    total_cost=fields.Float('Coste por entrega',compute='calculate_total_cost',readonly=True)
+
+    def calculate_total_cost(self):
+        for order in self:
+            totalCost=0
+            for order_line in order.order_lines:
+                totalCost+=order_line.product_id.current_cost*order_line.amount
+            order.total_cost+=totalCost
+
     weekly_price=fields.Float('Precio semanal',compute='calculate_weekly_price',readonly=True)
 
     def calculate_weekly_price(self):
