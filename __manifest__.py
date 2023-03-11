@@ -4,16 +4,20 @@
 
     'summary': """ Modulo para la gestión de repartos """,
 
-    'description': """ Descripcion de prueba """,
+    'description': """ Modulo que permite gestionar repartos, fechas, productos y precios para varias direcciones y clientes.""",
 
     'author': "A21RoiGF",
     'website': "https://sparcival.com",
+
+    'images': ['static/description/icon.png'],
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Uncategorized',
     'version': '14.0.1',
+
+    'category': 'Inventory,Logistics,Delivery & Shipping,Sales Management',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
