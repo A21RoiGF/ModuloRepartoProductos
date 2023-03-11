@@ -1,4 +1,6 @@
-# Modulo de reparto de productos (ODOO 14)
+# Modulo de reparto de productos
+
+![odoo 14(1)](https://user-images.githubusercontent.com/113439402/224481850-c7db1919-5bfe-43ff-bc08-82ce2d32c68f.png)
 
 Este es un módulo para Odoo 14 que permite gestionar el reparto de productos, como alimentos, bebidas u otros productos que se distribuyen de forma regular. Con este módulo, puedes definir las entregas de productos, las fechas, inventario y ganancias.
 
