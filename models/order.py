@@ -124,6 +124,7 @@ class Order(models.Model):
         for order in self:
             order.delivery_adress_name = str(order.delivery_adress_id.adress)+' - '+order.delivery_adress_id.country_id.name + ' (delivery.adress,' + str(order.delivery_adress_id.id) + ')'
 
+    customer=fields.Many2one('delivery.customer',string='Cliente',required=True)
 
     # Borrar un registro
     def delete_order(self):

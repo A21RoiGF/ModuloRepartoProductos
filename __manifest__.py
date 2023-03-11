@@ -30,6 +30,7 @@
         'views/delivery_product.xml',
         'views/delivery_product_price.xml',
         'views/delivery_adress.xml',
+        'views/delivery_customer.xml',
     ],
     # only loaded in demonstration mode
     #'demo': [

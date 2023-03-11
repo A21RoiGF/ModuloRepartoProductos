@@ -18,6 +18,7 @@
             <form>                
                 <group>
                     <field name="order_lines"/>
+                    <field name="customer"/>
                     <field name="active_order"/>
                     <field name="programmed_date"/>
                     <field name="frecuency"/>
@@ -37,6 +38,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="order_lines"/>
+                <field name="customer"/>
                 <field name="active_order"/>
                 <field name="frecuency"/>
                 <field name="frecuency_states"/>

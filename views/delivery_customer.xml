@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+ <!-- Form View -->
+    <record id="customer_view_form" model="ir.ui.view">
+        <field name="name">Customer Form</field>
+        <field name="model">delivery.customer</field>
+        <field name="arch" type="xml">
+            <form>                
+                <group>
+                    <group>
+                        <field name="name"/>     
+                        <field name="birth_date"/>                               
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

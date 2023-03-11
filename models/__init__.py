@@ -3,3 +3,4 @@
 from . import product
 from . import order
 from . import adress
+from . import customer
