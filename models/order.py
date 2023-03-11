@@ -96,6 +96,12 @@ class Order(models.Model):
                 totalCost+=order_line.product_id.current_cost*order_line.amount
             order.total_cost+=totalCost
 
+    benefit=fields.Float('Beneficio',compute='calculate_benefit',readonly=True)
+
+    def calculate_benefit(self):
+        for order in self:
+            order.benefit=order.total_price-order.total_cost
+
     weekly_price=fields.Float('Precio semanal',compute='calculate_weekly_price',readonly=True)
 
     def calculate_weekly_price(self):
