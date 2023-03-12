@@ -7,7 +7,8 @@
         <field name="arch" type="xml">
             <form>                
                 <group>
-                    <field name="name"/>     
+                    <field name="name"/> 
+                    <field name="name_surnames"/>     
                     <field name="birth_date"/>                               
                 </group>
             </form>
