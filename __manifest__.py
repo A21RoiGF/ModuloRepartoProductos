@@ -24,7 +24,8 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/groups.xml',
+        'security/ir.model.access.csv',
         'views/delivery_order.xml',
         'views/delivery_order_line.xml',
         'views/delivery_product.xml',

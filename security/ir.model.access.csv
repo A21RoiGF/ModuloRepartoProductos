@@ -1,2 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mimodulo_mimodulo,mimodulo.mimodulo,model_mimodulo_mimodulo,base.group_user,1,1,1,1
+acl_delivery_order,delivery.order_default,model_delivery_order,base.group_user,1,0,0,0
+acl_delivery_order,delivery.order_default,model_delivery_order,group_delivery_manager,1,1,1,1
+acl_delivery_order_line,delivery.order.line_default,model_delivery_order_line,base.group_user,1,0,0,0
+acl_delivery_order_line,delivery.order.line_default,model_delivery_order_line,group_delivery_manager,1,1,1,1
+acl_delivery_adress,delivery.adress_default,model_delivery_adress,base.group_user,11,0,0,0
+acl_delivery_adress,delivery.adress_default,model_delivery_adress,group_delivery_manager,1,1,1,1
+acl_delivery_customer,delivery.customer_default,model_delivery_customer,base.group_user,1,0,0,0
+acl_delivery_customer,delivery.customer_default,model_delivery_customer,group_delivery_manager,1,1,1,1
+acl_delivery_product,delivery.product_default,model_delivery_product,base.group_user,1,0,0,0
+acl_delivery_product,delivery.product_default,model_delivery_product,group_delivery_manager,1,1,1,1
+acl_delivery_product_price,delivery.product.price_default,model_delivery_product_price,base.group_user,1,0,0,0
+acl_delivery_product_price,delivery.product.price_default,model_delivery_product_price,group_delivery_manager,1,1,1,1
